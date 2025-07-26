@@ -14,7 +14,7 @@ const FeaturedBikes = () => {
       reviews: 124,
       image: "https://images.unsplash.com/photo-1544191696-15693136e0e4?w=400&h=300&fit=crop",
       badge: "Best Seller",
-      badgeColor: "bg-accent"
+      badgeVariant: "default"
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ const FeaturedBikes = () => {
       reviews: 89,
       image: "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=400&h=300&fit=crop",
       badge: "Sale",
-      badgeColor: "bg-destructive"
+      badgeVariant: "destructive"
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ const FeaturedBikes = () => {
       reviews: 156,
       image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop",
       badge: "Premium",
-      badgeColor: "bg-warning"
+      badgeVariant: "secondary"
     },
     {
       id: 4,
@@ -47,68 +47,86 @@ const FeaturedBikes = () => {
       reviews: 203,
       image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop",
       badge: "New",
-      badgeColor: "bg-success"
+      badgeVariant: "outline"
     }
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-24 bg-gradient-to-br from-background via-background to-muted/20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Bikes</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover our handpicked selection of premium bicycles designed for every rider
+        <div className="text-center mb-16">
+          <div className="inline-block">
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent mb-6">
+              Featured Bikes
+            </h2>
+          </div>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Discover our handpicked selection of premium bicycles designed for every adventure
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {bikes.map((bike) => (
-            <Card key={bike.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden rounded-t-lg">
+            <Card key={bike.id} className="group relative overflow-hidden border-0 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardContent className="p-0 relative">
+                <div className="relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
                   <img 
                     src={bike.image} 
                     alt={bike.name}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <Badge className={`absolute top-4 left-4 ${bike.badgeColor} text-white`}>
+                  <Badge 
+                    variant={bike.badgeVariant as any}
+                    className="absolute top-4 left-4 z-20 shadow-lg backdrop-blur-sm font-semibold"
+                  >
                     {bike.badge}
                   </Badge>
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="absolute top-4 right-4 bg-white/90 hover:bg-white text-gray-600 hover:text-destructive"
+                    className="absolute top-4 right-4 z-20 bg-white/10 hover:bg-white/20 text-white hover:text-destructive backdrop-blur-md border border-white/20 shadow-lg transition-all duration-300 hover:scale-110"
                   >
                     <Heart className="h-4 w-4" />
                   </Button>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                <div className="p-6 space-y-4">
+                  <h3 className="font-bold text-xl text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                     {bike.name}
                   </h3>
                   
-                  <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center gap-3">
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
                         <Star 
                           key={i} 
-                          className={`h-4 w-4 ${i < Math.floor(bike.rating) ? 'text-warning fill-current' : 'text-gray-300'}`} 
+                          className={`h-4 w-4 transition-colors duration-200 ${
+                            i < Math.floor(bike.rating) 
+                              ? 'text-yellow-400 fill-current drop-shadow-sm' 
+                              : 'text-muted-foreground/40'
+                          }`} 
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-600">({bike.reviews})</span>
+                    <span className="text-sm text-muted-foreground font-medium">({bike.reviews} reviews)</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-2xl font-bold text-gray-900">${bike.price}</span>
+                  <div className="flex items-baseline gap-3 pt-2">
+                    <span className="text-3xl font-bold text-foreground">${bike.price}</span>
                     {bike.originalPrice && (
-                      <span className="text-lg text-gray-500 line-through">${bike.originalPrice}</span>
+                      <div className="flex flex-col">
+                        <span className="text-lg text-muted-foreground line-through">${bike.originalPrice}</span>
+                        <span className="text-xs text-success font-semibold">
+                          Save ${(bike.originalPrice - bike.price).toFixed(0)}
+                        </span>
+                      </div>
                     )}
                   </div>
                   
-                  <Button className="w-full group/btn">
-                    <ShoppingCart className="h-4 w-4 mr-2 group-hover/btn:translate-x-1 transition-transform" />
+                  <Button className="w-full mt-6 group/btn bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all duration-300 font-semibold">
+                    <ShoppingCart className="h-4 w-4 mr-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
                     Add to Cart
                   </Button>
                 </div>
@@ -117,8 +135,12 @@ const FeaturedBikes = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="px-8">
+        <div className="text-center mt-16">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="px-10 py-4 text-lg font-semibold border-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+          >
             View All Bikes
           </Button>
         </div>
