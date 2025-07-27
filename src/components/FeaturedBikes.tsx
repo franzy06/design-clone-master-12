@@ -125,7 +125,13 @@ const FeaturedBikes = () => {
                     )}
                   </div>
                   
-                  <Button className="w-full mt-6 group/btn bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all duration-300 font-semibold">
+                  <Button 
+                    className="w-full mt-6 group/btn bg-gradient-to-r from-primary to-accent hover:shadow-glow transition-all duration-300 font-semibold hover:scale-105"
+                    onClick={() => {
+                      console.log(`Added ${bike.name} to cart`);
+                      // Add toast notification here if needed
+                    }}
+                  >
                     <ShoppingCart className="h-4 w-4 mr-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
                     Add to Cart
                   </Button>

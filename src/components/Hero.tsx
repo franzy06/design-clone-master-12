@@ -29,7 +29,7 @@ const Hero = () => {
               Explore Collection
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
             </Button>
-            <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-medium hover:border-white/40 transition-all duration-300">
+            <Button variant="outline" size="lg" className="border-white/30 bg-white/5 text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-medium hover:border-white/50 transition-all duration-300 shadow-lg">
               <Play className="mr-2 h-5 w-5" />
               Watch Video
             </Button>

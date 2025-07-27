@@ -64,7 +64,13 @@ const NewArrivals = () => {
                     <Button variant="secondary" size="icon" className="bg-white/95 hover:bg-white backdrop-blur-sm shadow-lg hover:scale-110 transition-all duration-300">
                       <Eye className="h-4 w-4" />
                     </Button>
-                    <Button size="icon" className="bg-gradient-to-r from-primary to-accent hover:shadow-glow shadow-lg hover:scale-110 transition-all duration-300">
+                    <Button 
+                      size="icon" 
+                      className="bg-gradient-to-r from-primary to-accent hover:shadow-glow shadow-lg hover:scale-110 transition-all duration-300"
+                      onClick={() => {
+                        console.log(`Quick add ${bike.name} to cart`);
+                      }}
+                    >
                       <ShoppingCart className="h-4 w-4" />
                     </Button>
                   </div>
@@ -89,7 +95,13 @@ const NewArrivals = () => {
                   
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-foreground">${bike.price}</span>
-                    <Button className="group/btn bg-gradient-to-r from-primary to-accent hover:shadow-glow transition-all duration-300">
+                    <Button 
+                      className="group/btn bg-gradient-to-r from-primary to-accent hover:shadow-glow transition-all duration-300 hover:scale-105"
+                      onClick={() => {
+                        console.log(`Added ${bike.name} to cart`);
+                        // Add toast notification here if needed
+                      }}
+                    >
                       <ShoppingCart className="h-4 w-4 mr-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
                       Add to Cart
                     </Button>
